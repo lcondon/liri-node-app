@@ -30,8 +30,7 @@ function returnTweets() {
             console.log(error.message);
         }
         for (var i = 0; i < tweets.length; i++) {
-            console.log(tweets[i].text);
-            console.log(tweets[i].created_at);
+            console.log(`${tweets[i].text} : ${tweets[i].created_at}`);
         }
     });
 }
@@ -42,10 +41,10 @@ function returnSong(search) {
             return console.log('Error occurred: ' + err);
         }
 
-        console.log(data.tracks.items[0].name);
-        console.log(data.tracks.items[0].artists[0].name);
-        console.log(data.tracks.items[0].album.name);
-        console.log(data.tracks.items[0].preview_url);
+        console.log(`Title: ${data.tracks.items[0].name}`);
+        console.log(`Artist: ${data.tracks.items[0].artists[0].name}`);
+        console.log(`Album: ${data.tracks.items[0].album.name}`);
+        console.log(`Preview URL: ${data.tracks.items[0].preview_url}`);
     });
 }
 
@@ -55,14 +54,14 @@ function returnMovie(search) {
             console.log('error:', error);
         };
         var res = JSON.parse(body);
-        console.log(res.Title);
-        console.log(res.Year);
+        console.log(`Title: ${res.Title}`);
+        console.log(`Year: ${res.Year}`);
         console.log(res.Ratings[0].Source + ": " + res.Ratings[0].Value);
         console.log(res.Ratings[1].Source + ": " + res.Ratings[1].Value);
-        console.log(res.Country);
-        console.log(res.Language);
-        console.log(res.Plot);
-        console.log(res.Actors);
+        console.log(`Country: ${res.Country}`);
+        console.log(`Language: ${res.Language}`);
+        console.log(`Summary: ${res.Plot}`);
+        console.log(`Actors: ${res.Actors}`);
     });
 }
 
