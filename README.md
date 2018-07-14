@@ -1,5 +1,5 @@
 # liri-node-app
-##Getting started
+## Getting started
 * Clone repository
 * Run `npm install`
 * Command line
