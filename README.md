@@ -5,7 +5,7 @@
 * Command line
   * `node liri <command> <title>`
   * Possible commands
-    * `node liri 'my-tweets'`
+    * `node liri my-tweets`
       * Returns last 20 tweets
     * `node liri spotify-this-song <title>`
       * Returns info about a specific song
