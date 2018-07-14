@@ -71,26 +71,21 @@ function returnMovie(search) {
         };
         var res = JSON.parse(body);
         var arr =[
-        `Title: ${res.Title}`,
-        `Year: ${res.Year}`,
-        res.Ratings[0].Source + ": " + res.Ratings[0].Value,
-        res.Ratings[1].Source + ": " + res.Ratings[1].Value,
-        `Country: ${res.Country}`,
-        `Language: ${res.Language}`,
-        `Summary: ${res.Plot}`,
-        `Actors: ${res.Actors}`
-        ];
+            `Title: ${res.Title}`,
+            `Year: ${res.Year}`];
+        for (var i = 0; i < res.Ratings.length; i++){
+            arr.push(res.Ratings[i].Source + ": " + res.Ratings[i].Value)
+        }
+        arr.push(`Country: ${res.Country}`);
+        arr.push(`Language: ${res.Language}`);
+        arr.push(`Summary: ${res.Plot}`);
+        arr.push(`Actors: ${res.Actors}`);
         fs.appendFile("log.txt", arr.join("\n\n") + divider, function(err) {
             if (err) throw err;
           });
-        console.log(`Title: ${res.Title}`);
-        console.log(`Year: ${res.Year}`);
-        console.log(res.Ratings[0].Source + ": " + res.Ratings[0].Value);
-        console.log(res.Ratings[1].Source + ": " + res.Ratings[1].Value);
-        console.log(`Country: ${res.Country}`);
-        console.log(`Language: ${res.Language}`);
-        console.log(`Summary: ${res.Plot}`);
-        console.log(`Actors: ${res.Actors}`);
+        for (var i = 0; i<arr.length;i++){
+            console.log(arr[i]);
+        }
     });
 }
 
