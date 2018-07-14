@@ -24,14 +24,22 @@ var params = {
     trim_user: true
 }
 
+var divider = "\n------------------------------------------------------------\n\n";
+
 function returnTweets() {
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (error) {
             console.log(error.message);
         }
+        var arr = [];
         for (var i = 0; i < tweets.length; i++) {
             console.log(`${tweets[i].text} : ${tweets[i].created_at}`);
+            var tweet = `${tweets[i].text} : ${tweets[i].created_at}`;
+            arr.push(tweet);
         }
+        fs.appendFile("log.txt", arr.join("\n\n") + divider, function(err) {
+            if (err) throw err;
+          });
     });
 }
 
@@ -40,7 +48,15 @@ function returnSong(search) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-
+        var arr =[
+        `Title: ${data.tracks.items[0].name}`,
+        `Artist: ${data.tracks.items[0].artists[0].name}`,
+        `Album: ${data.tracks.items[0].album.name}`,
+        `Preview URL: ${data.tracks.items[0].preview_url}`
+        ];
+        fs.appendFile("log.txt", arr.join("\n\n") + divider, function(err) {
+            if (err) throw err;
+          });
         console.log(`Title: ${data.tracks.items[0].name}`);
         console.log(`Artist: ${data.tracks.items[0].artists[0].name}`);
         console.log(`Album: ${data.tracks.items[0].album.name}`);
@@ -54,6 +70,19 @@ function returnMovie(search) {
             console.log('error:', error);
         };
         var res = JSON.parse(body);
+        var arr =[
+        `Title: ${res.Title}`,
+        `Year: ${res.Year}`,
+        res.Ratings[0].Source + ": " + res.Ratings[0].Value,
+        res.Ratings[1].Source + ": " + res.Ratings[1].Value,
+        `Country: ${res.Country}`,
+        `Language: ${res.Language}`,
+        `Summary: ${res.Plot}`,
+        `Actors: ${res.Actors}`
+        ];
+        fs.appendFile("log.txt", arr.join("\n\n") + divider, function(err) {
+            if (err) throw err;
+          });
         console.log(`Title: ${res.Title}`);
         console.log(`Year: ${res.Year}`);
         console.log(res.Ratings[0].Source + ": " + res.Ratings[0].Value);
